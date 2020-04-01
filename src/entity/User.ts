@@ -8,12 +8,18 @@ import {
 
 @Entity()
 export default class User extends BaseEntity {
-    @PrimaryGeneratedColumn()
-    id: number
+    @PrimaryGeneratedColumn('uuid')
+    id!: string
 
     @Column()
-    name: string
+    name!: string
+
+    @Column()
+    email!: string
+
+    @Column()
+    gender!: string
 
     @CreateDateColumn({ type: 'timestamp' })
-    created_at: Date
+    created_at!: Date
 }

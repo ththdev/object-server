@@ -7,16 +7,15 @@ import {
     OneToMany,
     ManyToOne
 } from 'typeorm'
-import ItemImage from './ItemImage'
-import Collection from './Collection'
+import User from './User'
 
 @Entity()
 export default class Item extends BaseEntity {
-    @PrimaryGeneratedColumn()
-    id: number
+    @PrimaryGeneratedColumn('uuid')
+    id!: string
 
     @Column()
-    name: string
+    name!: string
 
     @Column()
     price: number
@@ -24,12 +23,12 @@ export default class Item extends BaseEntity {
     @Column()
     brand: string
 
-    @OneToMany(type => ItemImage, itemImage => itemImage.parentItem)
-    imageUrls: ItemImage[]
+    @Column("simple-array", { nullable: true })
+    imageUrls: string[]
 
-    @ManyToOne(type => Collection, collection => collection.items)
-    parentCollection: Collection
+    @Column("uuid")
+    creator_id!: string
 
     @CreateDateColumn({ type: 'timestamp' })
-    created_at: Date
+    created_at!: Date
 }
